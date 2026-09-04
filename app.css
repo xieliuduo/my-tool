@@ -23,8 +23,9 @@
 html,
 body {
   margin: 0;
-  width: 680px;
-  min-height: 590px;
+  width: 100%;
+  min-width: 720px;
+  min-height: 100%;
   color: var(--text);
   background:
     linear-gradient(rgba(187, 244, 81, 0.025) 1px, transparent 1px),
@@ -32,6 +33,10 @@ body {
     var(--bg);
   background-size: 24px 24px;
   font-family: var(--sans);
+}
+
+body {
+  min-height: 100vh;
 }
 
 button,
@@ -46,8 +51,10 @@ button {
 }
 
 .app-shell {
-  min-height: 590px;
-  padding: 18px;
+  width: min(100%, 1600px);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 26px 34px 20px;
 }
 
 .topbar,
@@ -61,7 +68,7 @@ footer {
 }
 
 .topbar {
-  padding-bottom: 16px;
+  padding-bottom: 20px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -74,8 +81,8 @@ footer {
 .brand-mark {
   display: grid;
   place-items: center;
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   border: 1px solid var(--accent);
   color: var(--accent);
   font: 700 14px var(--mono);
@@ -89,7 +96,7 @@ p {
 }
 
 h1 {
-  font-size: 16px;
+  font-size: 19px;
   letter-spacing: 0.04em;
 }
 
@@ -134,16 +141,16 @@ footer {
 .tool-tabs {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin: 14px 0 18px;
+  gap: 10px;
+  margin: 20px 0 28px;
 }
 
 .tool-tab {
   display: flex;
   align-items: center;
   gap: 10px;
-  min-height: 58px;
-  padding: 10px 12px;
+  min-height: 70px;
+  padding: 13px 16px;
   text-align: left;
   cursor: pointer;
   border: 1px solid var(--line);
@@ -174,7 +181,7 @@ footer {
 }
 
 .tool-tab strong {
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .tool-tab small {
@@ -185,6 +192,7 @@ footer {
 
 .tool-panel {
   display: none;
+  min-height: calc(100vh - 230px);
   animation: reveal 180ms ease-out;
 }
 
@@ -200,17 +208,17 @@ footer {
 }
 
 .section-heading {
-  margin-bottom: 17px;
+  margin-bottom: 24px;
 }
 
 .section-heading h2 {
   margin-top: 3px;
-  font-size: 22px;
+  font-size: 28px;
   letter-spacing: -0.03em;
 }
 
 .status-chip {
-  padding: 5px 8px;
+  padding: 7px 10px;
   color: var(--muted);
   border: 1px solid var(--line);
   font: 9px var(--mono);
@@ -241,9 +249,9 @@ select {
 }
 
 input {
-  height: 48px;
+  height: 56px;
   padding: 0 42px 0 13px;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 textarea {
@@ -251,7 +259,7 @@ textarea {
   padding: 12px;
   resize: vertical;
   line-height: 1.55;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 select {
@@ -282,7 +290,7 @@ select:focus {
 }
 
 .action-row {
-  min-height: 51px;
+  min-height: 62px;
   justify-content: flex-start;
   gap: 8px;
 }
@@ -295,9 +303,9 @@ select:focus {
 }
 
 .button {
-  min-height: 31px;
-  padding: 0 12px;
-  font-size: 11px;
+  min-height: 36px;
+  padding: 0 15px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -336,14 +344,14 @@ select:focus {
 
 .result-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
 }
 
 .result-card {
   min-width: 0;
-  min-height: 85px;
-  padding: 11px;
+  min-height: 112px;
+  padding: 16px;
   border: 1px solid var(--line);
   background:
     linear-gradient(135deg, rgba(187, 244, 81, 0.035), transparent 48%),
@@ -373,13 +381,13 @@ output {
   margin: 9px 0 5px;
   overflow-wrap: anywhere;
   color: var(--text);
-  font: 12px/1.4 var(--mono);
+  font: 13px/1.5 var(--mono);
 }
 
 .result-card-wide output,
 .conversion-target output {
   color: var(--accent);
-  font-size: 15px;
+  font-size: 19px;
 }
 
 .result-card small,
@@ -393,8 +401,8 @@ output {
 }
 
 .conversion-display {
-  margin-top: 3px;
-  padding: 12px;
+  margin-top: 8px;
+  padding: 18px;
   border: 1px solid var(--line);
   background: var(--panel);
 }
@@ -417,7 +425,7 @@ output {
 }
 
 .conversion-target {
-  padding: 11px;
+  padding: 18px;
   border: 1px solid rgba(187, 244, 81, 0.28);
   background: rgba(187, 244, 81, 0.04);
 }
@@ -432,11 +440,11 @@ output {
 .diff-input-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 14px;
 }
 
 .diff-textarea {
-  min-height: 144px;
+  min-height: clamp(250px, 34vh, 440px);
   white-space: pre;
   tab-size: 2;
 }
@@ -446,7 +454,7 @@ output {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  min-height: 54px;
+  min-height: 66px;
 }
 
 .diff-toolbar-group {
@@ -458,8 +466,8 @@ output {
   display: flex;
   align-items: center;
   gap: 14px;
-  min-height: 38px;
-  padding: 0 11px;
+  min-height: 46px;
+  padding: 0 15px;
   border: 1px solid var(--line);
   background: var(--panel);
   font: 10px var(--mono);
@@ -483,18 +491,18 @@ output {
 }
 
 .diff-view {
-  max-height: 270px;
-  min-height: 92px;
-  margin-top: 8px;
+  max-height: none;
+  min-height: clamp(300px, 38vh, 620px);
+  margin-top: 10px;
   overflow: auto;
   border: 1px solid var(--line);
   background: #0d1210;
-  font: 10px/1.55 var(--mono);
+  font: 12px/1.6 var(--mono);
 }
 
 .diff-empty {
   display: grid;
-  min-height: 90px;
+  min-height: clamp(300px, 38vh, 620px);
   place-items: center;
   color: var(--muted);
 }
@@ -502,7 +510,7 @@ output {
 .diff-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  min-width: 620px;
+  min-width: 900px;
   border-bottom: 1px solid rgba(65, 85, 77, 0.35);
 }
 
@@ -512,8 +520,8 @@ output {
 
 .diff-cell {
   display: grid;
-  grid-template-columns: 34px minmax(0, 1fr);
-  min-height: 27px;
+  grid-template-columns: 48px minmax(0, 1fr);
+  min-height: 32px;
 }
 
 .diff-cell + .diff-cell {
@@ -565,20 +573,7 @@ output {
   border-color: rgba(98, 217, 150, 0.45);
 }
 
-@media (max-width: 560px) {
-  html,
-  body {
-    width: 430px;
-  }
-
-  .tool-tab {
-    padding: 9px 8px;
-  }
-
-  .tool-tab small {
-    display: none;
-  }
-
+@media (max-width: 900px) {
   .diff-input-grid {
     grid-template-columns: 1fr;
   }
@@ -588,11 +583,15 @@ output {
     flex-direction: column;
     padding: 9px 0;
   }
+
+  .result-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 footer {
-  margin-top: 12px;
-  padding-top: 10px;
+  margin-top: 22px;
+  padding-top: 14px;
   border-top: 1px solid var(--line);
 }
 

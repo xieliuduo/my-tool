@@ -1,6 +1,6 @@
 # 研发工具箱
 
-一个面向研发人员的轻量浏览器插件，所有数据均在本地处理。
+一个面向研发人员的轻量浏览器插件。点击插件图标后会打开独立的全窗口工具标签页，所有数据均在本地处理。
 
 ## 已有工具
 
@@ -36,6 +36,7 @@ Thu, 03 Sep 2026 09:33:14 GMT
 2. 开启“开发者模式”。
 3. 点击“加载已解压的扩展程序”。
 4. 选择本项目目录。
+5. 点击浏览器工具栏中的插件图标，进入独立工具标签页。
 
 ## 开发与验证
 
@@ -50,9 +51,10 @@ npm run check
 
 ```text
 manifest.json             插件清单
-popup.html                弹窗结构
-popup.css                 弹窗样式
-popup.js                  UI 交互
+background.js             点击图标后打开独立标签页
+app.html                  全窗口工具页面
+app.css                   页面样式
+app.js                    UI 交互
 src/utils/date-time.js    日期时间核心逻辑
 src/utils/text-diff.js    文本差异核心逻辑
 tests/                    自动化测试

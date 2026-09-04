@@ -10,6 +10,12 @@ import { buildSideBySideDiff, formatJsonText } from "./src/utils/text-diff.js";
 
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
+const AVAILABLE_TOOLS = new Set(["timestamp", "timezone", "diff"]);
+const TOOL_TITLES = {
+  timestamp: "时间戳转换",
+  timezone: "时间转换",
+  diff: "文本 / 数据对比"
+};
 
 const elements = {
   liveTimestamp: $("#liveTimestamp"),
@@ -104,9 +110,15 @@ function convertTimezone() {
   }
 }
 
-function switchTool(tool) {
-  $$(".tool-tab").forEach((tab) => tab.classList.toggle("is-active", tab.dataset.tool === tool));
-  $$(".tool-panel").forEach((panel) => panel.classList.toggle("is-active", panel.dataset.panel === tool));
+function switchTool(tool, syncHash = true) {
+  const nextTool = AVAILABLE_TOOLS.has(tool) ? tool : "timestamp";
+  $$(".tool-tab").forEach((tab) => tab.classList.toggle("is-active", tab.dataset.tool === nextTool));
+  $$(".tool-panel").forEach((panel) => panel.classList.toggle("is-active", panel.dataset.panel === nextTool));
+  document.title = `${TOOL_TITLES[nextTool]} · 研发工具箱`;
+
+  if (syncHash && window.location.hash !== `#${nextTool}`) {
+    history.replaceState(null, "", `#${nextTool}`);
+  }
 }
 
 function appendSegments(container, segments, side) {
@@ -235,6 +247,7 @@ async function copyOutput(targetId) {
 $$(".tool-tab").forEach((tab) => {
   tab.addEventListener("click", () => switchTool(tab.dataset.tool));
 });
+window.addEventListener("hashchange", () => switchTool(window.location.hash.slice(1), false));
 
 elements.timestampInput.addEventListener("input", convertTimestamp);
 $("#clearTimestamp").addEventListener("click", () => {
@@ -285,3 +298,4 @@ setInterval(updateLiveTimestamp, 1000);
 resetTimestampResults();
 resetTimezoneResult();
 renderDiff();
+switchTool(window.location.hash.slice(1), true);
