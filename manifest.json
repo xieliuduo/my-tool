@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "研发工具箱",
   "description": "面向研发人员的全窗口工具箱，提供时间转换、文本与数据对比等常用能力。",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "background": {
     "service_worker": "background.js"
   },

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="dark" />
+    <meta name="color-scheme" content="dark light" />
     <title>研发工具箱</title>
     <link rel="stylesheet" href="app.css" />
   </head>
@@ -11,15 +11,21 @@
     <main class="app-shell">
       <header class="topbar">
         <div class="brand">
-          <span class="brand-mark" aria-hidden="true">&gt;_</span>
+          <img class="brand-mark" src="icons/icon-128.png" alt="" aria-hidden="true" />
           <div>
             <h1>研发工具箱</h1>
             <p>DEV UTILITY DECK</p>
           </div>
         </div>
-        <div class="live-clock" title="当前 Unix 时间戳">
-          <span class="pulse" aria-hidden="true"></span>
-          <time id="liveTimestamp">--</time>
+        <div class="topbar-actions">
+          <div class="live-clock" title="当前 Unix 时间戳">
+            <span class="pulse" aria-hidden="true"></span>
+            <time id="liveTimestamp">--</time>
+          </div>
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="切换为浅色主题">
+            <span id="themeIcon" aria-hidden="true">☀</span>
+            <span id="themeLabel">浅色</span>
+          </button>
         </div>
       </header>
 
@@ -227,7 +233,7 @@
       </section>
 
       <footer>
-        <span>MY-TOOL v0.3.0</span>
+        <span>MY-TOOL v0.4.0</span>
         <span>LOCAL ONLY · NO DATA UPLOAD</span>
       </footer>
     </main>

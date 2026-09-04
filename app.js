@@ -16,6 +16,7 @@ const TOOL_TITLES = {
   timezone: "时间转换",
   diff: "文本 / 数据对比"
 };
+const THEME_STORAGE_KEY = "my-tool-theme";
 
 const elements = {
   liveTimestamp: $("#liveTimestamp"),
@@ -34,11 +35,35 @@ const elements = {
   diffView: $("#diffView"),
   diffSummary: $("#diffSummary"),
   diffError: $("#diffError"),
+  themeToggle: $("#themeToggle"),
+  themeIcon: $("#themeIcon"),
+  themeLabel: $("#themeLabel"),
   toast: $("#toast")
 };
 
 let toastTimer;
 let diffTimer;
+
+function getInitialTheme() {
+  const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+  if (savedTheme === "light" || savedTheme === "dark") {
+    return savedTheme;
+  }
+  return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+}
+
+function applyTheme(theme, persist = false) {
+  const nextTheme = theme === "light" ? "light" : "dark";
+  document.documentElement.dataset.theme = nextTheme;
+  elements.themeIcon.textContent = nextTheme === "light" ? "☾" : "☀";
+  elements.themeLabel.textContent = nextTheme === "light" ? "深色" : "浅色";
+  elements.themeToggle.setAttribute("aria-label", `切换为${nextTheme === "light" ? "深色" : "浅色"}主题`);
+  elements.themeToggle.setAttribute("aria-pressed", String(nextTheme === "light"));
+
+  if (persist) {
+    localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+  }
+}
 
 function setText(id, value) {
   $(`#${id}`).textContent = value;
@@ -248,6 +273,10 @@ $$(".tool-tab").forEach((tab) => {
   tab.addEventListener("click", () => switchTool(tab.dataset.tool));
 });
 window.addEventListener("hashchange", () => switchTool(window.location.hash.slice(1), false));
+elements.themeToggle.addEventListener("click", () => {
+  const currentTheme = document.documentElement.dataset.theme;
+  applyTheme(currentTheme === "light" ? "dark" : "light", true);
+});
 
 elements.timestampInput.addEventListener("input", convertTimestamp);
 $("#clearTimestamp").addEventListener("click", () => {
@@ -293,6 +322,7 @@ $("#clearDiffText").addEventListener("click", () => {
 $("#formatLeftJson").addEventListener("click", () => formatJson("left"));
 $("#formatRightJson").addEventListener("click", () => formatJson("right"));
 
+applyTheme(getInitialTheme());
 updateLiveTimestamp();
 setInterval(updateLiveTimestamp, 1000);
 resetTimestampResults();
