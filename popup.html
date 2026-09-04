@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>研发工具箱</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">&gt;_</span>
+          <div>
+            <h1>研发工具箱</h1>
+            <p>DEV UTILITY DECK</p>
+          </div>
+        </div>
+        <div class="live-clock" title="当前 Unix 时间戳">
+          <span class="pulse" aria-hidden="true"></span>
+          <time id="liveTimestamp">--</time>
+        </div>
+      </header>
+
+      <nav class="tool-tabs" aria-label="工具列表">
+        <button class="tool-tab is-active" type="button" data-tool="timestamp">
+          <span class="tab-index">01</span>
+          <span>
+            <strong>时间戳转换</strong>
+            <small>Unix ↔ Date</small>
+          </span>
+        </button>
+        <button class="tool-tab" type="button" data-tool="timezone">
+          <span class="tab-index">02</span>
+          <span>
+            <strong>时间转换</strong>
+            <small>Timezone</small>
+          </span>
+        </button>
+      </nav>
+
+      <section class="tool-panel is-active" id="timestampPanel" data-panel="timestamp">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">TOOL / 01</span>
+            <h2>时间戳转换</h2>
+          </div>
+          <span class="status-chip" id="timestampUnit">自动识别秒 / 毫秒</span>
+        </div>
+
+        <label class="field-label" for="timestampInput">Unix 时间戳</label>
+        <div class="input-cluster">
+          <input
+            id="timestampInput"
+            inputmode="decimal"
+            autocomplete="off"
+            placeholder="例如：1788427994 或 1788427994000"
+          />
+          <button class="icon-button" id="clearTimestamp" type="button" title="清空" aria-label="清空时间戳">
+            ×
+          </button>
+        </div>
+        <div class="action-row">
+          <button class="button button-primary" id="useCurrentTimestamp" type="button">使用当前时间</button>
+          <span class="hint">支持 10 位秒和 13 位毫秒时间戳</span>
+        </div>
+
+        <div class="result-grid" id="timestampResults" aria-live="polite">
+          <article class="result-card result-card-wide">
+            <div class="result-meta">
+              <span>北京时间</span>
+              <button class="copy-button" type="button" data-copy-target="beijingTime">复制</button>
+            </div>
+            <output id="beijingTime">等待输入</output>
+            <small>Asia/Shanghai · UTC+08:00</small>
+          </article>
+          <article class="result-card">
+            <div class="result-meta">
+              <span>本地时间</span>
+              <button class="copy-button" type="button" data-copy-target="localTime">复制</button>
+            </div>
+            <output id="localTime">—</output>
+          </article>
+          <article class="result-card">
+            <div class="result-meta">
+              <span>UTC / ISO 8601</span>
+              <button class="copy-button" type="button" data-copy-target="utcTime">复制</button>
+            </div>
+            <output id="utcTime">—</output>
+          </article>
+          <article class="result-card">
+            <div class="result-meta">
+              <span>秒</span>
+              <button class="copy-button" type="button" data-copy-target="secondsValue">复制</button>
+            </div>
+            <output id="secondsValue">—</output>
+          </article>
+          <article class="result-card">
+            <div class="result-meta">
+              <span>毫秒</span>
+              <button class="copy-button" type="button" data-copy-target="millisecondsValue">复制</button>
+            </div>
+            <output id="millisecondsValue">—</output>
+          </article>
+        </div>
+        <p class="error-message" id="timestampError" role="alert"></p>
+      </section>
+
+      <section class="tool-panel" id="timezonePanel" data-panel="timezone">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">TOOL / 02</span>
+            <h2>时间转换</h2>
+          </div>
+          <span class="status-chip">RFC / ISO / 常见格式</span>
+        </div>
+
+        <label class="field-label" for="dateStringInput">原始时间</label>
+        <textarea
+          id="dateStringInput"
+          rows="3"
+          spellcheck="false"
+          placeholder="例如：Thu, 03 Sep 2026 09:33:14 GMT"
+        ></textarea>
+
+        <div class="select-row">
+          <label>
+            <span class="field-label">目标时区</span>
+            <select id="timezoneSelect">
+              <option value="Asia/Shanghai">北京时间 · UTC+8</option>
+              <option value="UTC">协调世界时 · UTC</option>
+              <option value="Asia/Tokyo">东京时间 · UTC+9</option>
+              <option value="Asia/Singapore">新加坡时间 · UTC+8</option>
+              <option value="Europe/London">伦敦时间</option>
+              <option value="America/New_York">纽约时间</option>
+              <option value="America/Los_Angeles">洛杉矶时间</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="action-row">
+          <button class="button button-primary" id="useExampleDate" type="button">填入示例</button>
+          <button class="button button-ghost" id="useCurrentDate" type="button">使用当前时间</button>
+        </div>
+
+        <article class="conversion-display" aria-live="polite">
+          <div class="conversion-source">
+            <span>解析结果</span>
+            <output id="parsedDate">等待输入</output>
+          </div>
+          <div class="conversion-arrow" aria-hidden="true">↓</div>
+          <div class="conversion-target">
+            <div class="result-meta">
+              <span id="timezoneLabel">北京时间</span>
+              <button class="copy-button" type="button" data-copy-target="convertedDate">复制</button>
+            </div>
+            <output id="convertedDate">—</output>
+            <small id="timezoneOffset">Asia/Shanghai</small>
+          </div>
+        </article>
+        <p class="error-message" id="timezoneError" role="alert"></p>
+      </section>
+
+      <footer>
+        <span>MY-TOOL v0.1.0</span>
+        <span>LOCAL ONLY · NO DATA UPLOAD</span>
+      </footer>
+    </main>
+
+    <div class="toast" id="toast" role="status">已复制</div>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>
