@@ -38,6 +38,13 @@
             <small>Timezone</small>
           </span>
         </button>
+        <button class="tool-tab" type="button" data-tool="diff">
+          <span class="tab-index">03</span>
+          <span>
+            <strong>文本对比</strong>
+            <small>Text / JSON Diff</small>
+          </span>
+        </button>
       </nav>
 
       <section class="tool-panel is-active" id="timestampPanel" data-panel="timestamp">
@@ -162,8 +169,65 @@
         <p class="error-message" id="timezoneError" role="alert"></p>
       </section>
 
+      <section class="tool-panel" id="diffPanel" data-panel="diff">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">TOOL / 03</span>
+            <h2>文本 / 数据对比</h2>
+          </div>
+          <span class="status-chip">逐行 + 字符级高亮</span>
+        </div>
+
+        <div class="diff-input-grid">
+          <label>
+            <span class="field-label">原始内容</span>
+            <textarea
+              id="leftDiffInput"
+              class="diff-textarea"
+              rows="7"
+              spellcheck="false"
+              placeholder="粘贴原始文本或 JSON"
+            ></textarea>
+          </label>
+          <label>
+            <span class="field-label">新内容</span>
+            <textarea
+              id="rightDiffInput"
+              class="diff-textarea"
+              rows="7"
+              spellcheck="false"
+              placeholder="粘贴需要对比的文本或 JSON"
+            ></textarea>
+          </label>
+        </div>
+
+        <div class="diff-toolbar">
+          <div class="diff-toolbar-group">
+            <button class="button button-primary" id="compareText" type="button">比较差异</button>
+            <button class="button button-ghost" id="swapDiffText" type="button">交换</button>
+            <button class="button button-ghost" id="clearDiffText" type="button">清空</button>
+          </div>
+          <div class="diff-toolbar-group">
+            <button class="button button-subtle" id="formatLeftJson" type="button">格式化左侧 JSON</button>
+            <button class="button button-subtle" id="formatRightJson" type="button">格式化右侧 JSON</button>
+          </div>
+        </div>
+
+        <div class="diff-summary" id="diffSummary" aria-live="polite">
+          <strong>等待对比</strong>
+          <span class="summary-added">+0 新增</span>
+          <span class="summary-removed">−0 删除</span>
+          <span class="summary-changed">~0 修改</span>
+        </div>
+
+        <div class="diff-view" id="diffView" aria-label="文本对比结果">
+          <div class="diff-empty">输入两侧内容后，将在这里高亮显示差异</div>
+        </div>
+        <p class="error-message" id="diffError" role="alert"></p>
+      </section>
+
       <footer>
-        <span>MY-TOOL v0.1.0</span>
+        <span>MY-TOOL v0.2.0</span>
         <span>LOCAL ONLY · NO DATA UPLOAD</span>
       </footer>
     </main>

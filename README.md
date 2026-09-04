@@ -23,6 +23,13 @@ Thu, 03 Sep 2026 09:33:14 GMT
 → 北京时间 2026-09-03 17:33:14
 ```
 
+### 3. 文本 / 数据对比
+
+- 左右输入两份文本或数据，实时高亮差异
+- 按行对齐新增、删除和修改内容
+- 修改行内进一步高亮不同字符
+- 支持左右 JSON 一键格式化、内容交换与清空
+
 ## 本地安装
 
 1. 打开 Chrome 的 `chrome://extensions/`，或 Edge 的 `edge://extensions/`。
@@ -47,5 +54,6 @@ popup.html                弹窗结构
 popup.css                 弹窗样式
 popup.js                  UI 交互
 src/utils/date-time.js    日期时间核心逻辑
+src/utils/text-diff.js    文本差异核心逻辑
 tests/                    自动化测试
 ```

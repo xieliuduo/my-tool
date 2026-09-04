@@ -1,10 +1,10 @@
 {
   "name": "my-tool-browser-extension",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
     "test": "node --test",
-    "check": "node --check popup.js && node --check src/utils/date-time.js"
+    "check": "node --check popup.js && node --check src/utils/date-time.js && node --check src/utils/text-diff.js"
   }
 }

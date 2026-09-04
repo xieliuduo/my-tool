@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "研发工具箱",
   "description": "面向研发人员的轻量浏览器工具箱，提供时间戳与时区转换等常用能力。",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "action": {
     "default_title": "研发工具箱",
     "default_popup": "popup.html",

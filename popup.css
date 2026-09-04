@@ -9,6 +9,9 @@
   --accent: #bbf451;
   --accent-ink: #182305;
   --warning: #ff8d71;
+  --added: #62d996;
+  --removed: #ff7d79;
+  --changed: #ffc857;
   --mono: "SFMono-Regular", "Cascadia Code", "Roboto Mono", Consolas, monospace;
   --sans: "Avenir Next", Avenir, "PingFang SC", "Hiragino Sans GB", sans-serif;
 }
@@ -20,7 +23,7 @@
 html,
 body {
   margin: 0;
-  width: 430px;
+  width: 680px;
   min-height: 590px;
   color: var(--text);
   background:
@@ -130,7 +133,7 @@ footer {
 
 .tool-tabs {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
   margin: 14px 0 18px;
 }
@@ -319,6 +322,12 @@ select:focus {
   background: transparent;
 }
 
+.button-subtle {
+  color: var(--muted);
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
+
 .hint {
   margin-left: auto;
   color: var(--muted);
@@ -418,6 +427,167 @@ output {
   margin-top: 7px;
   color: var(--warning);
   font-size: 10px;
+}
+
+.diff-input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.diff-textarea {
+  min-height: 144px;
+  white-space: pre;
+  tab-size: 2;
+}
+
+.diff-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 54px;
+}
+
+.diff-toolbar-group {
+  display: flex;
+  gap: 7px;
+}
+
+.diff-summary {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 38px;
+  padding: 0 11px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  font: 10px var(--mono);
+}
+
+.diff-summary strong {
+  margin-right: auto;
+  color: var(--text);
+}
+
+.summary-added {
+  color: var(--added);
+}
+
+.summary-removed {
+  color: var(--removed);
+}
+
+.summary-changed {
+  color: var(--changed);
+}
+
+.diff-view {
+  max-height: 270px;
+  min-height: 92px;
+  margin-top: 8px;
+  overflow: auto;
+  border: 1px solid var(--line);
+  background: #0d1210;
+  font: 10px/1.55 var(--mono);
+}
+
+.diff-empty {
+  display: grid;
+  min-height: 90px;
+  place-items: center;
+  color: var(--muted);
+}
+
+.diff-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-width: 620px;
+  border-bottom: 1px solid rgba(65, 85, 77, 0.35);
+}
+
+.diff-row:last-child {
+  border-bottom: 0;
+}
+
+.diff-cell {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  min-height: 27px;
+}
+
+.diff-cell + .diff-cell {
+  border-left: 1px solid var(--line);
+}
+
+.diff-line-number {
+  padding: 5px 7px;
+  color: #5f7068;
+  text-align: right;
+  user-select: none;
+  border-right: 1px solid rgba(65, 85, 77, 0.35);
+  background: rgba(255, 255, 255, 0.012);
+}
+
+.diff-code {
+  min-width: max-content;
+  margin: 0;
+  padding: 5px 8px;
+  white-space: pre;
+}
+
+.diff-row.is-added .diff-cell-right,
+.diff-row.is-changed .diff-cell-right {
+  background: rgba(98, 217, 150, 0.08);
+}
+
+.diff-row.is-removed .diff-cell-left,
+.diff-row.is-changed .diff-cell-left {
+  background: rgba(255, 125, 121, 0.08);
+}
+
+.diff-inline-left,
+.diff-inline-right {
+  padding: 1px 0;
+}
+
+.diff-inline-left {
+  color: #ffd0ce;
+  background: rgba(255, 125, 121, 0.28);
+}
+
+.diff-inline-right {
+  color: #caffdf;
+  background: rgba(98, 217, 150, 0.25);
+}
+
+.diff-view.is-identical {
+  border-color: rgba(98, 217, 150, 0.45);
+}
+
+@media (max-width: 560px) {
+  html,
+  body {
+    width: 430px;
+  }
+
+  .tool-tab {
+    padding: 9px 8px;
+  }
+
+  .tool-tab small {
+    display: none;
+  }
+
+  .diff-input-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .diff-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 9px 0;
+  }
 }
 
 footer {
